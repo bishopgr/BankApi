@@ -1,7 +1,8 @@
 ﻿using BankApi.Domain.Models;
+using BankApi.Domain.Storage;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace BankApi.Domain
+namespace BankApi.Domain.Services
 {
     //The account service is trivial.
     public class AccountService
@@ -51,17 +52,17 @@ namespace BankApi.Domain
 
         private static void CheckValidDeposit(decimal depositAmount)
         {
-            if(depositAmount < decimal.Zero)
+            if (depositAmount < decimal.Zero)
             {
                 throw new InvalidOperationException("You cannot deposit a negative amount.");
             }
 
-            if(depositAmount == decimal.Zero)
+            if (depositAmount == decimal.Zero)
             {
                 throw new InvalidOperationException("You cannot deposit 0 FakeDollars into this account.");
             }
 
-            if(depositAmount > 10000)
+            if (depositAmount > 10000)
             {
                 throw new InvalidOperationException("You cannot deposit more than 10000 FakeDollars at once into an account.");
             }
@@ -82,12 +83,12 @@ namespace BankApi.Domain
         private static void CheckValidWithdraw(decimal balance, decimal amount)
         {
 
-            if(balance < amount)
+            if (balance < amount)
             {
                 throw new InvalidOperationException($"You cannot withdraw more than what your current balance is.");
             }
 
-            if(balance < 100)
+            if (balance < 100)
             {
                 throw new InvalidOperationException("You cannot have an account balance below 100 FakeDollars.");
             }
@@ -104,7 +105,7 @@ namespace BankApi.Domain
 
             static bool CheckIfWithdrawingTooMuch(decimal balance, decimal amount)
             {
-                var isWithDrawingTooMuch = amount > (balance / 100) * 90;
+                var isWithDrawingTooMuch = amount > balance / 100 * 90;
 
                 if (isWithDrawingTooMuch)
                 {

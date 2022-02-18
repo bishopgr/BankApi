@@ -1,5 +1,5 @@
-﻿using BankApi.Domain;
-using BankApi.Domain.Models;
+﻿using BankApi.Domain.Services;
+using BankApi.Domain.Storage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

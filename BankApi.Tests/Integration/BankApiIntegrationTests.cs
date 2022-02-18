@@ -1,5 +1,5 @@
-﻿using BankApi.Domain;
-using BankApi.Domain.Models;
+﻿using BankApi.Domain.Models;
+using BankApi.Domain.Services;
 using BankApi.Tests.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using System;

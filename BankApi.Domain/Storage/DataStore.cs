@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BankApi.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankApi.Domain.Models
+namespace BankApi.Domain.Storage
 {
     public static class DataStore
     {

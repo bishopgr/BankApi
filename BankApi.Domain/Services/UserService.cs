@@ -1,6 +1,7 @@
 ﻿using BankApi.Domain.Models;
+using BankApi.Domain.Storage;
 
-namespace BankApi.Domain
+namespace BankApi.Domain.Services
 {
     public class UserService
     {
@@ -9,7 +10,7 @@ namespace BankApi.Domain
         {
             var user = DataStore.Users.FirstOrDefault(u => u.Id == userId);
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
