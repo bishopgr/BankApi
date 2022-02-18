@@ -4,7 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace BankApi.Domain.Services
 {
-    //The account service is trivial.
+    
     public class AccountService
     {
 
