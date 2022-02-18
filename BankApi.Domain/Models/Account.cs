@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApi.Domain.Models
 {
-    //This account class is trivial. In a real world, there would more properties here, possibly to help with frontend/fraud/security/etc 
+    //In a real world, there would more properties here, possibly to help with frontend/fraud/security/etc 
     public record Account
     {
         public Guid AccountId { get; set; } = Guid.NewGuid();
