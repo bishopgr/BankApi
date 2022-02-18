@@ -43,5 +43,77 @@ namespace BankApi.Tests.Integration
             _server?.Output?.WriteLine($"{createdUser}{Environment.NewLine}{createdUser?.Accounts?[0]}");
             Assert.True(true);
         }
+
+        [Theory]
+        [InlineData(100)]
+        [InlineData(1000)]
+        [InlineData(10000)]
+        public void Should_Successfully_Deposit_Several_Amounts(decimal amount)
+        {
+
+            var userService = _server.Services.GetRequiredService<UserService>();
+            var accountService = _server.Services.GetRequiredService<AccountService>();
+
+            var createdUser = userService.CreateUser("testDude");
+
+            accountService.Deposit(createdUser.Id, createdUser.Accounts[0].AccountId, amount);
+
+            _server.Output?.WriteLine($"Deposited {amount} successfully. Balance is {createdUser.Accounts[0].Balance}");
+        }
+
+        [Theory]
+        [InlineData(10)]
+        [InlineData(20)]
+        [InlineData(50)]
+        public void Should_Successfully_Withdraw_Several_Amounts(decimal amount)
+        {
+
+            var userService = _server.Services.GetRequiredService<UserService>();
+            var accountService = _server.Services.GetRequiredService<AccountService>();
+
+            var createdUser = userService.CreateUser("testDude");
+
+            accountService.Withdraw(createdUser.Id, createdUser.Accounts[0].AccountId, amount);
+
+            _server.Output?.WriteLine($"Withdrew {amount} successfully. Balance is {createdUser.Accounts[0].Balance}");
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(0)]
+        [InlineData(10001)]
+        public void Should_Throw_On_Bad_Amount_Deposited(decimal amount)
+        {
+
+            var userService = _server.Services.GetRequiredService<UserService>();
+            var accountService = _server.Services.GetRequiredService<AccountService>();
+
+            var createdUser = userService.CreateUser("testDude");
+
+
+            Assert.Throws<InvalidOperationException>(() => accountService.Withdraw(createdUser.Id, createdUser.Accounts[0].AccountId, amount));
+
+            _server.Output?.WriteLine($"Threw exception from {nameof(accountService.Deposit)} for {amount} successfully.");
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(0)]
+        [InlineData(99)]
+        public void Should_Throw_On_Bad_Amount_Withdrawn(decimal amount)
+        {
+
+            var userService = _server.Services.GetRequiredService<UserService>();
+            var accountService = _server.Services.GetRequiredService<AccountService>();
+
+            var createdUser = userService.CreateUser("testDude");
+
+
+            Assert.Throws<InvalidOperationException>(() => accountService.Withdraw(createdUser.Id, createdUser.Accounts[0].AccountId, amount));
+
+            _server.Output?.WriteLine($"Threw exception from {nameof(accountService.Withdraw)} for {amount} successfully.");
+        }
+
+
     }
 }
