@@ -124,7 +124,7 @@ namespace BankApi.Domain
             {
                 var user = DataStore.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user == null) { throw new InvalidOperationException($"The user id {userId} was not found."); } // Return an error message to the user
+                if (user == null) { throw new InvalidOperationException($"The user id {userId} was not found."); }
 
                 _cache.Set(userId, user);
 
